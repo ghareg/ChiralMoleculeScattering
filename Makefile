@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -Wall -O2 -std=c++11 -fopenmp
 MKLINC = -I${MKLROOT}/include
 CPLUSINC =
-LFGSL = -lgsl -lgslcblas
+LFGSL = -lgsl -lgslcblas -fopenmp
 LFMKL = #-L${MKLROOT}/lib/intel64 -lmkl_gf_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm -ldl -liomp5
 LFARP =
 LFLAGS = -lpthread

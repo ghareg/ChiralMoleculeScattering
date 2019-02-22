@@ -60,5 +60,5 @@ struct Param
 
 
 void initPauliMatrix(PauliMatrix& pal);
-void updateLVal(LValStruct& LVal, int n, int m, const Param& pm, const PauliMatrix& pal);
+void updateLVal(LValStruct& LVal, int n, int m, const Param& pm, const PauliMatrix& pal, const double* fact);
 #endif
