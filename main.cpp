@@ -178,16 +178,16 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 
 							f0 += I10t * Iz2(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L1 + I10t * 
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L2;
-							f1 += F1 * I10t * PGVal.PG2 + (F2 * I21t + F3 * I31t) * PGVal.PG1;
-							f2 += (2.0 * I31t + F3 * I10t) * PGVal.PG3 + (-I33t + absm * I31t + mc * 1.0 * I * I21t +
-								I42t + F2 * (-0.5 * I62t + 0.5 * absm * I60t + 0.5 * mc * I * (I10t + I70t) + 0.5 * I91t) +
+							f1 += F1 * I10t * PGVal.PG2 + (-I * kappa * I12t + F2 * I21t + F3 * I31t) * PGVal.PG1;
+							f2 += (2.0 * (1.0 + I * kappa) * I31t + F3 * I10t) * PGVal.PG3 + ((1.0 + I * kappa) * (-I33t + absm * I31t + mc * 1.0 * I * I21t +
+								I42t) + F2 * (-0.5 * I62t + 0.5 * absm * I60t + 0.5 * mc * I * (I10t + I70t) + 0.5 * I91t) +
 								F3 * (-0.5 * (I12t - I72t) + 0.5 * absm * (I10t - I70t) + 0.5 * mc * I * I60t + 0.5 * (I451t - I101t))) * PGVal.PG4
 								+ F1 * (-I31t + absm * I3m1t + 1.0 * mc * I * I2m1t + I40t) * PGVal.PG5;
-							f3 += (2.0 * I21t + F2 * I10t) * PGVal.PG3 + (-I23t + absm * I21t - mc * 1.0 * I * I31t +
-								I52t + F2 * (-0.5 * (I12t + I72t) + 0.5 * absm * (I10t + I70t) - 0.5 * mc * I * I60t + 0.5 * (I101t + I451t)) +
+							f3 += (2.0 * (1.0 + I * kappa) * I21t + F2 * I10t) * PGVal.PG3 + ((1.0 + I * kappa) * (-I23t + absm * I21t - mc * 1.0 * I * I31t +
+								I52t) + F2 * (-0.5 * (I12t + I72t) + 0.5 * absm * (I10t + I70t) - 0.5 * mc * I * I60t + 0.5 * (I101t + I451t)) +
 								F3 * (-0.5 * I62t + 0.5 * absm * I60t - 0.5 * mc * I * (I10t - I70t) + 0.5 * I91t)) * PGVal.PG4
 								+ F1 * (-I21t + absm * I2m1t - 1.0 * mc * I * I3m1t + I50t) * PGVal.PG5;
-							f4 += (mc * 2.0 * I * I10t - F2 * I31t + F2 * absm * I3m1t + mc * F2 * I * I2m1t + 
+							f4 += (mc * 2.0 * (1.0 + I * kappa) * I * I10t - F2 * I31t + F2 * absm * I3m1t + mc * F2 * I * I2m1t + 
 								F2 * I40t + F3 * I21t - F3 * absm * I2m1t + mc * F3 * I * I3m1t - F3 * I50t) * PGVal.PG1;
 						}
 					}
