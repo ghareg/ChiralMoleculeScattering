@@ -74,7 +74,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 {
 	double E = EnMult * (rs * EMax / ND + 0.001);
 	double k = sqrt(E);
-	double alpha = 1.0;
+	double alpha = 0.0;
 	double beta = 0.0;
 	double theta = 0;
 	double tau = 0;
@@ -90,6 +90,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 	Matrix2cd f4;
 	Matrix2cd rho = 0.5 * pal.pal0;
 	Complex I10t;
+	Complex I12t;
 	Complex I21t;
 	Complex I31t;
 	Complex I23t;
@@ -100,6 +101,13 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 	Complex I3m1t;
 	Complex I40t;
 	Complex I50t;
+	Complex I60t;
+	Complex I62t;
+	Complex I70t;
+	Complex I72t;
+	Complex I451t;
+	Complex I91t;
+	Complex I101t;
 	Complex mult;
 	LValStruct LVal;
 	GValStruct GVal;
@@ -109,13 +117,13 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 
 	for (int ind1 = 0; ind1 < (re - rs); ++ind1) {
 		k = sqrt(E);
-		theta = 0.0;
+		theta = 1.2;
 		for (int ind2 = 0; ind2 < ND; ++ind2) {
-			tau = 2 * Pi - 1.0;
+			tau = 0.0;
 			Polc = 0.0;	
-			for (int ind3 = 0; ind3 < 1; ++ind3) {
+			for (int ind3 = 0; ind3 < ND; ++ind3) {
 				beta = 0.0;
-				for (int ind4 = 0; ind4 < 1; ++ind4) {
+				for (int ind4 = 0; ind4 < ND; ++ind4) {
 					pm.updateValues(k, alpha, beta, theta, tau);
 					f0 << 0.0, 0.0, 0.0, 0.0;
 					f1 << 0.0, 0.0, 0.0, 0.0;
@@ -148,6 +156,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							}
 
 							I10t = mult * I10(nc, -mc, -pm.kSinth, pm.tau);
+							I12t = mult * I12(nc, -mc, -pm.kSinth, pm.tau);
 							I21t = mult * I21(nc, -mc, -pm.kSinth, pm.tau);
 							I31t = mult * I31(nc, -mc, -pm.kSinth, pm.tau);
 							I23t = mult * I23(nc, -mc, -pm.kSinth, pm.tau);
@@ -158,14 +167,26 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 							I3m1t = mult * I3m1(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
 							I40t = mult * I40(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
 							I50t = mult * I50(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
+							I60t = mult * I60(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
+							I62t = mult * I62(nc, -mc, -pm.kSinth, pm.tau);
+							I70t = mult * I70(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
+							I72t = mult * I72(nc, -mc, -pm.kSinth, pm.tau);
+							I451t = mult * I451(nc, -mc, -pm.kSinth, pm.tau);
+							I91t = mult * I91(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);
+							I101t = mult * I101(nc, -mc, -pm.kSinth, pm.tau, I30i, I31i);	
+
 
 							f0 += I10t * Iz2(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L1 + I10t * 
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L2;
 							f1 += F1 * I10t * PGVal.PG2 + (F2 * I21t + F3 * I31t) * PGVal.PG1;
 							f2 += (2.0 * I31t + F3 * I10t) * PGVal.PG3 + (-I33t + absm * I31t + mc * 1.0 * I * I21t +
-								I42t) * PGVal.PG4;
+								I42t + F2 * (-0.5 * I62t + 0.5 * absm * I60t + 0.5 * mc * I * (I10t + I70t) + 0.5 * I91t) +
+								F3 * (-0.5 * (I12t - I72t) + 0.5 * absm * (I10t - I70t) + 0.5 * mc * I * I60t + 0.5 * (I451t - I101t))) * PGVal.PG4
+								+ F1 * (-I31t + absm * I3m1t + 1.0 * mc * I * I2m1t + I40t) * PGVal.PG5;
 							f3 += (2.0 * I21t + F2 * I10t) * PGVal.PG3 + (-I23t + absm * I21t - mc * 1.0 * I * I31t +
-								I52t) * PGVal.PG4;
+								I52t + F2 * (-0.5 * (I12t + I72t) + 0.5 * absm * (I10t + I70t) - 0.5 * mc * I * I60t + 0.5 * (I101t + I451t)) +
+								F3 * (-0.5 * I62t + 0.5 * absm * I60t - 0.5 * mc * I * (I10t - I70t) + 0.5 * I91t)) * PGVal.PG4
+								+ F1 * (-I21t + absm * I2m1t - 1.0 * mc * I * I3m1t + I50t) * PGVal.PG5;
 							f4 += (mc * 2.0 * I * I10t - F2 * I31t + F2 * absm * I3m1t + mc * F2 * I * I2m1t + 
 								F2 * I40t + F3 * I21t - F3 * absm * I2m1t + mc * F3 * I * I3m1t - F3 * I50t) * PGVal.PG1;
 						}

@@ -3,8 +3,8 @@
 
 const double Pi = 3.14159;
 
-const int nmax = 3;
-const int mmax = 3;
+const int nmax = 0;
+const int mmax = 1;
 
 const double Lz = 15;
 const double a = 3;
@@ -27,7 +27,7 @@ const double alphaSOC = alpha0 * 1E6; //alpha / (a * a); alpha in A^2
 const int ND = 50;
 const double EMax = 3000;
 
-const int nCore = 1;
+const int nCore = 4;
 const double thresh = 1E-6;
 
 

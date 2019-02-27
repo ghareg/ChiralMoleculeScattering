@@ -19,4 +19,10 @@ Complex I42(int n, int m, double kSinal, double beta);
 Complex I50(int n, int m, double kSinal, double beta, Complex* I30, Complex* I31);
 Complex I52(int n, int m, double kSinal, double beta);
 Complex I60(int n, int m, double kSinal, double beta, Complex* I30, Complex* I31);
+Complex I62(int n, int m, double kSinal, double beta);
+Complex I70(int n, int m, double kSinal, double beta, Complex* I30, Complex* I31);
+Complex I72(int n, int m, double kSinal, double beta);
+Complex I451(int n, int m, double kSinal, double beta);
+Complex I91(int n, int m, double kSinal, double beta, Complex* I30, Complex* I31);
+Complex I101(int n, int m, double kSinal, double beta, Complex* I30, Complex* I31);
 #endif
