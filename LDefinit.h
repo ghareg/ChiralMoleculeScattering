@@ -43,19 +43,13 @@ struct Param
 
 	double k;
 	double alpha;
-	double beta;
 	double theta;
-	double tau;
 	double kSinal;
 	double kCosal;
 	double kSinth;
 	double kCosth;
-	double sinBeta;
-	double cosBeta;
-	double sinTau;
-	double cosTau;
 
-	void updateValues(double kc, double alphac, double betac, double thetac, double tauc);
+	void updateValues(double kc, double alphac, double thetac);
 };
 
 
