@@ -1,6 +1,7 @@
 #include "kzIntegral.h"
 #include "rIntegral.h"
 #include <iostream>
+#include <iomanip>
 #include <gsl/gsl_sf_hyperg.h>
 #include <thread>
 void calcFullPol(double* Pol, const double* fact, const PauliMatrix& pal);
@@ -24,13 +25,16 @@ int main()
 
 	calcFullPol(Pol, fact, pal);
 	double E = 0.001;
+	double theta = 0.0;
+	std::cout << std::setprecision(4);
 	for (int ind1 = 0; ind1 < ND; ++ind1) {
-		double theta = 0.0;
+		E = 0.001;
 		for (int ind2 = 0; ind2 < ND; ++ind2) {
-			std::cout << E << "\t" << theta << "\t" << Pol[ind1 * ND + ind2] << std::endl;
-			theta += Pi / ND;
+			std::cout << theta << "\t" << E << "\t" << Pol[ind2 * ND + ind1] << std::endl;
+			E += EMax / ND;
 		}
-		E += EMax / ND;
+		std::cout << std::endl;
+		theta += Pi / ND;
 	}
 	delete[] Pol;
 }
@@ -74,7 +78,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 {
 	double E = EnMult * (rs * EMax / ND + 0.001);
 	double k = sqrt(E);
-	double alpha = 0.0;
+	double alpha = 0.8;
 	double beta = 0.0;
 	double theta = 0;
 	double tau = 0;
@@ -117,7 +121,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 
 	for (int ind1 = 0; ind1 < (re - rs); ++ind1) {
 		k = sqrt(E);
-		theta = 1.2;
+		theta = 0.0;
 		for (int ind2 = 0; ind2 < ND; ++ind2) {
 			tau = 0.0;
 			Polc = 0.0;	
@@ -203,7 +207,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 				}
 				tau += 2 * Pi / ND;
 			}
-			Pol[ind1 * ND + ind2] = Polc / (ND * ND);
+			Pol[ind1 * ND + ind2] = Polc / (1.0 * ND * ND);
 			theta += Pi / ND;
 		}
 		E += EnMult * EMax / ND;
