@@ -127,7 +127,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 			Polc = 0.0;	
 			for (int ind3 = 0; ind3 < ND; ++ind3) {
 				beta = 0.0;
-				for (int ind4 = 0; ind4 < 1; ++ind4) {
+				for (int ind4 = 0; ind4 < ND; ++ind4) {
 					pm.updateValues(k, alpha, beta, theta, tau);
 					f0 << 0.0, 0.0, 0.0, 0.0;
 					f1 << 0.0, 0.0, 0.0, 0.0;
@@ -182,7 +182,7 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 
 							f0 += I10t * Iz2(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L1 + I10t * 
 								Iz1(pm.kCosal, pm.kCosth, 0, Lz) * LVal.L2;
-							f1 += F1 * I10t * PGVal.PG2 + (-I * kappa * I12t + F2 * I21t + F3 * I31t) * PGVal.PG1;
+							f1 += (1.0 + I * kappaD) * F1 * I10t * PGVal.PG2 + (-I * kappa * I12t + (1.0 + I * kappaD) * (F2 * I21t + F3 * I31t)) * PGVal.PG1;
 							f2 += (2.0 * (1.0 + I * kappa) * I31t + F3 * I10t) * PGVal.PG3 + ((1.0 + I * kappa) * (-I33t + absm * I31t + mc * 1.0 * I * I21t +
 								I42t) + F2 * (-0.5 * I62t + 0.5 * absm * I60t + 0.5 * mc * I * (I10t + I70t) + 0.5 * I91t) +
 								F3 * (-0.5 * (I12t - I72t) + 0.5 * absm * (I10t - I70t) + 0.5 * mc * I * I60t + 0.5 * (I451t - I101t))) * PGVal.PG4
@@ -203,11 +203,11 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 					ft = f0 + f1 + f2 + f3 + f4;
 					ft = ft * rho * ft.adjoint();
 					Polc += ((pal.pal3 * ft).trace() / ft.trace()).real();
-					//beta += 2 * Pi / ND;
+					beta += 2 * Pi / ND;
 				}
 				tau += 2 * Pi / ND;
 			}
-			Pol[ind1 * ND + ind2] = Polc / (1.0 * ND);
+			Pol[ind1 * ND + ind2] = Polc / (1.0 * ND * ND);
 			theta += Pi / ND;
 		}
 		E += EnMult * EMax / ND;
