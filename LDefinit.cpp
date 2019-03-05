@@ -24,9 +24,9 @@ void updateLVal(LValStruct& LVal, int n, int m, const Param& pm, const PauliMatr
 	Complex I2 = mult * I21(n, m, pm.kSinal, pm.beta);
 	Complex I3 = mult * I31(n, m, pm.kSinal, pm.beta);
 	Complex I12l = mult * I12(n, m, pm.kSinal, pm.beta);
-	LVal.L2 = (I * kappa * I12l + (1.0 + I * kappaD) * (F2 * I2 + F3 * I3)) * pal.pal0 + alphaSOC * (2.0 * (1.0 + I * kappa) * pm.kCosal * I3 + (F3 * pm.kCosal - F1 * pm.kSinal * pm.sinBeta) * I1)  * pal.pal1 -
-		alphaSOC * (2.0 * (1.0 + I * kappa) * pm.kCosal * I2 + (F2 * pm.kCosal - F1 * pm.kSinal * pm.cosBeta) * I1) * pal.pal2 + 
-		alphaSOC * (2.0 * (1.0 + I * kappa) * pm.kSinal * (I2 * pm.sinBeta - I3 * pm.cosBeta) + (F2 * pm.kSinal * pm.sinBeta - F3 * pm.kSinal * pm.cosBeta) * I1) * pal.pal3;
+	LVal.L2 = (I * kappa * I12l + (1.0 + I * kappaD) * (F2 * I2 + F3 * I3)) * pal.pal0 + alphaSOC * (2.0 * pm.kCosal * I3 + (F3 * pm.kCosal - F1 * pm.kSinal * pm.sinBeta) * I1)  * pal.pal1 -
+		alphaSOC * (2.0 * pm.kCosal * I2 + (F2 * pm.kCosal - F1 * pm.kSinal * pm.cosBeta) * I1) * pal.pal2 + 
+		alphaSOC * (2.0 * pm.kSinal * (I2 * pm.sinBeta - I3 * pm.cosBeta) + (F2 * pm.kSinal * pm.sinBeta - F3 * pm.kSinal * pm.cosBeta) * I1) * pal.pal3;
 }	
 
 void Param::updateValues(double kc, double alphac, double betac, double thetac, double tauc)
