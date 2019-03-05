@@ -22,7 +22,11 @@ const double F3 = DipConst * mu3 / (2 * 2 * 2);
 const double EnMult = 2 * 9.1 * 1.6 * a * a * 1E-5 / (1.05 * 1.05);
 
 const double alpha0 = 1.05 * 1.05 * 0.01 / (4 * 9.1 * 9.1 * 9 * a * a); 
-const double alphaSOC = alpha0 * 1E6; //alpha / (a * a); alpha in A^2 
+const double alphaSOC = alpha0 * 1E6; //alpha / (a * a); alpha in A^2
+
+const double alphaSOC1 = 0.4 * alphaSOC;
+const double alphaSOC2 = 0.6 * alphaSOC;
+const double alphaSOC3 = 0.8 * alphaSOC;
 
 const int ND = 100;
 const double EMax = 1000;
