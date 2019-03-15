@@ -123,9 +123,9 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 		k = sqrt(E);
 		theta = 0.0;
 		for (int ind2 = 0; ind2 < ND; ++ind2) {
-			tau = 0.0;
+			tau = 1.0;
 			Polc = 0.0;	
-			for (int ind3 = 0; ind3 < ND; ++ind3) {
+			for (int ind3 = 0; ind3 < 1; ++ind3) {
 				beta = 0.0;
 				for (int ind4 = 0; ind4 < ND; ++ind4) {
 					pm.updateValues(k, alpha, beta, theta, tau);
@@ -205,9 +205,9 @@ void calcPol(double* Pol, const double* fact, const PauliMatrix& pal, int rs, in
 					Polc += ((pal.pal3 * ft).trace() / ft.trace()).real();
 					beta += 2 * Pi / ND;
 				}
-				tau += 2 * Pi / ND;
+				//tau += 2 * Pi / ND;
 			}
-			Pol[ind1 * ND + ind2] = Polc / (1.0 * ND * ND);
+			Pol[ind1 * ND + ind2] = Polc / (1.0 * ND); // (1.0 * ND * ND);
 			theta += Pi / ND;
 		}
 		E += EnMult * EMax / ND;

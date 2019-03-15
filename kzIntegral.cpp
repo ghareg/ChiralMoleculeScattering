@@ -46,7 +46,7 @@ void updateGVal(GValStruct& GVal, const LValStruct& LVal, double kCosal, Complex
 			(1.0 / (2.0 * knm * (kCosal - knm))) * LVal.L2;
 		GVal.G2 = (-2.0 * I * kCosal / ((kCosal * kCosal - knm * knm) * (kCosal * kCosal - knm * knm))) * LVal.L1 -
 		   (1.0 / (kCosal * kCosal - knm * knm)) * LVal.L2;
-		GVal.G3 = (-std::exp(I * (kCosal + knm) * Lz) / (2.0 * knm * (kCosal + knm) * (kCosal + knm)) - 
+		GVal.G3 = (-I * std::exp(I * (kCosal + knm) * Lz) / (2.0 * knm * (kCosal + knm) * (kCosal + knm)) - 
 			Lz * std::exp(I * (kCosal + knm) * Lz) / (2.0 * knm * (kCosal + knm))) * LVal.L1 - 
 			(std::exp(I * (kCosal + knm) * Lz) / (2.0 * knm * (kCosal + knm))) * LVal.L2;
 		GVal.G4 = (-1.0 / (kCosal * kCosal - knm * knm)) * LVal.L1;

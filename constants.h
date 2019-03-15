@@ -3,7 +3,7 @@
 
 const double Pi = 3.14159;
 
-const int nmax = 1;
+const int nmax = 2;
 const int mmax = 2;
 
 const double Lz = 15;
